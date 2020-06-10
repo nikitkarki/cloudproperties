@@ -1,0 +1,31 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+        
+  endpoint:
+    health:
+      show-details: always      
+
+
+
+
+
+resilience4j.circuitbreaker:
+    instances:
+        services1:
+            registerHealthIndicator: true
+            ring-buffer-size-in-closed-state: 5
+            permittedNumberOfCallsInHalfOpenState: 3
+            waitDurationInOpenState: 50s
+            failureRateThreshold: 50
+            eventConsumerBufferSize: 10
+            
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://eureka-env.eba-hkzppqwy.ap-southeast-1.elasticbeanstalk.com/eureka/
